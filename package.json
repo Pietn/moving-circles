@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Pietn/base-typescript-canvas#readme",
   "devDependencies": {
     "lite-server": "^2.2.2"
+  },
+  "dependencies": {
+    "systemjs": "^0.19.39"
   }
 }

@@ -1,0 +1,7 @@
+
+{
+  "server": {"routes": {
+        "/systemjs": "node_modules/systemjs/dist"
+    }
+  }
+}
