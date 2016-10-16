@@ -1,20 +1,22 @@
 import { Circle } from './circle';
 
 export class Drawer {
-  constructor(private context: CanvasRenderingContext2D) {
+  private circles: Array<Circle> = new Array<Circle>();
 
+  constructor(private context: CanvasRenderingContext2D, public width: number, public height: number) {
+    for (let i = 0; i < 10; i++) {
+      let circle = new Circle();
+      circle.x = Math.random() * this.width;
+      circle.y = Math.random() * this.height;
+      this.circles.push(circle)
+    }
   }
-
-  public width: number;
-  public height: number;
-
-  private circle = new Circle();
 
   public draw() {
     this.context.clearRect(0, 0, this.width, this.height);
 
-    this.circle.move(this.width, this.height);
-    this.drawCircle(this.circle.x, this.circle.y);
+    this.circles.forEach(t => t.move(this.width, this.height));
+    this.circles.forEach(t => this.drawCircle(t.x, t.y));
   }
 
   private drawCircle(x: number, y: number) {
