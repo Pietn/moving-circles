@@ -17,13 +17,22 @@ export class Drawer {
     this.context.clearRect(0, 0, this.width, this.height);
 
     this.circles.forEach(t => t.move(this.width, this.height));
-    this.circles.forEach(t => this.drawCircle(t.x, t.y));
+    this.circles.forEach(t => this.drawCircle(t));
   }
 
-  private drawCircle(x: number, y: number) {
+  private drawCircle(circle: Circle) {
     this.context.beginPath();
-    this.context.arc(x, y, 25, 0, 2 * Math.PI, false);
+    this.context.arc(circle.x, circle.y, 25, 0, 2 * Math.PI, false);
+    this.context.closePath();
     this.context.fillStyle = '#990000';
+    this.context.fill();
+
+    let x = circle.x + Math.cos(circle.direction) * 25;
+    let y = circle.y + Math.sin(circle.direction) * 25;
+    this.context.beginPath();
+    this.context.arc(x, y, 2, 0, 2 * Math.PI, false);
+    this.context.closePath();
+    this.context.fillStyle = '#000000';
     this.context.fill();
   }
 }

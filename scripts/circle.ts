@@ -4,6 +4,7 @@ export class Circle {
   public direction: number = 0;
 
   public move(width: number, height: number) {
+    this.direction += ((Math.random() - 0.5) / 20);
     this.x += Math.cos(this.direction);
     this.y += Math.sin(this.direction);
 
