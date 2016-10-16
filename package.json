@@ -4,8 +4,9 @@
   "description": "Drawing on a canvas with typescript.",
   "main": "index.js",
   "scripts": {
-    "start": "lite-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && concurrently \"npm run tscw\" \"npm run lite\" ",
+    "lite": "lite-server",
+    "tscw": "tsc -w"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,9 @@
   },
   "homepage": "https://github.com/Pietn/base-typescript-canvas#readme",
   "devDependencies": {
-    "lite-server": "^2.2.2"
+    "concurrently": "^3.1.0",
+    "lite-server": "^2.2.2",
+    "typescript": "^2.0.3"
   },
   "dependencies": {
     "systemjs": "^0.19.39"
