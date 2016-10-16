@@ -8,6 +8,7 @@ export class Drawer {
       let circle = new Circle();
       circle.x = Math.random() * this.width;
       circle.y = Math.random() * this.height;
+      circle.direction = Math.random() * Math.PI * 2;
       this.circles.push(circle)
     }
   }

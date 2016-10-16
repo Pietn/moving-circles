@@ -1,10 +1,11 @@
 export class Circle {
   public x: number = 0;
   public y: number = 0;
+  public direction: number = 0;
 
   public move(width: number, height: number) {
-    this.x += Math.random() * 10 - 5;
-    this.y += Math.random() * 10 - 5;
+    this.x += Math.cos(this.direction);
+    this.y += Math.sin(this.direction);
 
     if (this.x < 0) {
       this.x += width;
