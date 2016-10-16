@@ -1,3 +1,5 @@
+import { Circle } from './circle';
+
 export class Drawer {
   constructor(private context: CanvasRenderingContext2D) {
 
@@ -6,12 +8,19 @@ export class Drawer {
   public width: number;
   public height: number;
 
+  private circle = new Circle();
+
   public draw() {
     this.context.clearRect(0, 0, this.width, this.height);
-    this.context.fillStyle = '#33ff66';
-    this.context.fillRect(50, 50, 80, 60);
-    this.context.strokeStyle = '#660000';
-    this.context.lineWidth = 3;
-    this.context.strokeRect(50, 50, 80, 60);
+
+    this.circle.move(this.width, this.height);
+    this.drawCircle(this.circle.x, this.circle.y);
+  }
+
+  private drawCircle(x: number, y: number) {
+    this.context.beginPath();
+    this.context.arc(x, y, 25, 0, 2 * Math.PI, false);
+    this.context.fillStyle = '#990000';
+    this.context.fill();
   }
 }

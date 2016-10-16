@@ -1,0 +1,25 @@
+export class Circle {
+  public x: number = 0;
+  public y: number = 0;
+
+  public move(width: number, height: number) {
+    this.x += Math.random() * 10 - 5;
+    this.y += Math.random() * 10 - 5;
+
+    if (this.x < 0) {
+      this.x += width;
+    }
+
+    if (this.y < 0) {
+      this.y += height;
+    }
+
+    if (this.x > width) {
+      this.x -= width;
+    }
+
+    if (this.y > height) {
+      this.y -= height;
+    }
+  }
+}
