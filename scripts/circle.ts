@@ -2,6 +2,7 @@ export class Circle {
   public x: number = 0;
   public y: number = 0;
   public direction: number = 0;
+  public color: string;
 
   public move(width: number, height: number) {
     this.direction += ((Math.random() - 0.5) / 20);
