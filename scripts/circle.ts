@@ -3,6 +3,7 @@ export class Circle {
   public y: number = 0;
   public direction: number = 0;
   public color: string;
+  public eyeSpace: number = Math.PI / 6;
 
   public move(width: number, height: number) {
     this.direction += ((Math.random() - 0.5) / 20);
