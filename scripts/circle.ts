@@ -58,10 +58,26 @@ export class Circle {
         let y2 = y1 + Math.sin(eyeStart + viewStart + viewSpace * j) * eye.viewDistance;
         eye.views[j].location.x = x2;
         eye.views[j].location.y = y2;
-        eye.views[j].collisions = this.findCollisions(eye, eye.views[j], circles)
+        eye.views[j].collisions = this.findCollisions(eye, eye.views[j], circles);
+        eye.views[j].nearest = this.getNearest(eye.views[j].collisions, eye);
+        eye.views[j].location.color = eye.views[j].nearest ? eye.views[j].nearest.circle.color : '000000';
+        eye.location.color = eye.views[j].location.color;
       }
       eyeStart += this.eyeSpace;
     }
+  }
+
+  private getNearest(collisions: Array<Collision>, eye: Eye) : Collision {
+    var nearest: Collision = null;
+    var distance = eye.viewDistance;
+    for (let i = 0; i < collisions.length; i++) {
+      let d = MathHelpers.distance(collisions[i].location, eye.location);
+      if (d <= distance) {
+        nearest = collisions[i];
+        distance = d;
+      }
+    }
+    return nearest;
   }
 
   private findCollisions(eye: Eye, view: View, circles: Array<Circle>) : Array<Collision> {
@@ -70,7 +86,6 @@ export class Circle {
         if (u === this) {
           return;
         }
-        eye.views.forEach(view => {
           this.findPoints(u, eye.location, view.location)
             .filter(v => { 
               let d1 = MathHelpers.distance(v, eye.location);
@@ -80,7 +95,6 @@ export class Circle {
             .forEach(v =>{
               collisions.push({location: v, circle: u});
             });
-        });
       });
       return collisions;
   }

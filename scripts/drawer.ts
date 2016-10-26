@@ -5,7 +5,7 @@ export class Drawer {
   private circles: Array<Circle> = new Array<Circle>();
 
   constructor(private context: CanvasRenderingContext2D, public width: number, public height: number) {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 10; i++) {
       let circle = new Circle();
       circle.location.x = Math.random() * this.width;
       circle.location.y = Math.random() * this.height;
@@ -56,6 +56,7 @@ export class Drawer {
         this.context.closePath();
         this.context.stroke();
 
+        this.drawPoint(u.location);
         //collisions
         u.collisions.forEach(v => {
           this.drawPoint(v.location);
