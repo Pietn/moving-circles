@@ -1,12 +1,21 @@
 import { Circle } from './circle';
 import { Point } from './point';
+import { Creature } from './creature';
+import { Food } from './food';
 
 export class Drawer {
   private circles: Array<Circle> = new Array<Circle>();
 
   constructor(private context: CanvasRenderingContext2D, public width: number, public height: number) {
+    for (let i = 0; i < 30; i++) {
+      let food = new Food()
+      food.location.x = Math.random() * this.width;
+      food.location.y = Math.random() * this.height;
+      food.color = this.pad(Math.floor(Math.random() * (256*256*256)).toString(16), '0', 6);
+      this.circles.push(food);
+    }
     for (let i = 0; i < 10; i++) {
-      let circle = new Circle();
+      let circle = new Creature(this.width, this.height, this.circles);
       circle.location.x = Math.random() * this.width;
       circle.location.y = Math.random() * this.height;
       circle.direction = Math.random() * Math.PI * 2;
@@ -25,11 +34,27 @@ export class Drawer {
 
   public draw() {
     this.context.clearRect(0, 0, this.width, this.height);
-    this.circles.forEach(t => t.move(this.width, this.height, this.circles));
-    this.circles.forEach(t => this.drawCircle(t));
+    this.circles.forEach(t => t.update());
+    this.circles.forEach(t => {
+      if (t instanceof Creature) {
+        this.drawCreature(t);
+      } else if (t instanceof Food) {
+        this.drawFood(t);
+      }
+    });
   }
 
-  private drawCircle(circle: Circle) {
+  private drawFood(circle: Food) {
+    //circle;
+    this.context.beginPath();
+    this.context.arc(circle.location.x, circle.location.y, circle.size, 0, 2 * Math.PI, false);
+    this.context.closePath();
+    this.context.fillStyle = '#' + circle.color;
+    this.context.strokeStyle = '#' + circle.color;
+    this.context.fill();
+  }
+
+  private drawCreature(circle: Creature) {
     //circle;
     this.context.beginPath();
     this.context.arc(circle.location.x, circle.location.y, circle.size, 0, 2 * Math.PI, false);
