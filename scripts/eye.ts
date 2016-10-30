@@ -12,4 +12,5 @@ export class Eye {
   public location: Point = new Point();
   public views: Array<View> = [];
   public viewDistance: number = 200;
+  public offset: number = 0;
 }

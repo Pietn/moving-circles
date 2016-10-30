@@ -14,9 +14,12 @@ export class Creature implements Circle {
   public eyes: Array<Eye> = [];
 
   constructor(private width: number, private height: number, private circles: Array<Circle>) {
-    for(let i = 0; i < 2; i++) {
-      this.eyes.push(new Eye(10));
-    }
+    let eye1 = new Eye(10);
+    eye1.offset = Math.PI / 5;
+    this.eyes.push(eye1);
+    let eye2 = new Eye(10);
+    eye2.offset = -(Math.PI / 5);
+    this.eyes.push(eye2);
   }
 
   public update() {
@@ -54,6 +57,7 @@ export class Creature implements Circle {
         viewStart = -(eye.viewSpan / 2);
         viewSpace = eye.viewSpan / (eye.views.length - 1);
       }
+      viewStart += eye.offset;
       for (let j = 0; j < eye.views.length; j++) {
         let x2 = x1 + Math.cos(eyeStart + viewStart + viewSpace * j) * eye.viewDistance;
         let y2 = y1 + Math.sin(eyeStart + viewStart + viewSpace * j) * eye.viewDistance;
