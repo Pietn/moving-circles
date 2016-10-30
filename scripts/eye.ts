@@ -8,7 +8,7 @@ export class Eye {
     }
   }
 
-  public viewSpan: number = Math.PI / 4;
+  public viewSpan: number = Math.PI / 8;
   public location: Point = new Point();
   public views: Array<View> = [];
   public viewDistance: number = 200;

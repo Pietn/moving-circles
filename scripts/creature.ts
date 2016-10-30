@@ -14,10 +14,10 @@ export class Creature implements Circle {
   public eyes: Array<Eye> = [];
 
   constructor(private width: number, private height: number, private circles: Array<Circle>) {
-    let eye1 = new Eye(10);
+    let eye1 = new Eye(1);
     eye1.offset = Math.PI / 5;
     this.eyes.push(eye1);
-    let eye2 = new Eye(10);
+    let eye2 = new Eye(1);
     eye2.offset = -(Math.PI / 5);
     this.eyes.push(eye2);
   }
